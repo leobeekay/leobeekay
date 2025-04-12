@@ -1,1 +1,1 @@
-I am using the NEW version of Gamemaker
+I am using the NEW version of Gamemaker. Full documentation for Gamemaker is in MANUAL folder or at https://manual.gamemaker.io/monthly/en/#t=Content.htm

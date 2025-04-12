@@ -127,6 +127,31 @@ if (h_speed != 0 || v_speed != 0) {
     else if (sprite_index == spr_player_walk_up) sprite_index = spr_player_idle_up
 }
 
+// Ball throwing logic
+if (keyboard_check_pressed(vk_space)) {
+    // Create ball in the direction the player is facing
+    var _ball = instance_create_layer(x, y, "Instances", obj_ball);
+    
+    // Set ball direction based on player's facing direction
+    if (sprite_index == spr_player_idle_right || sprite_index == spr_player_walk_right) {
+        _ball.h_speed = 6;
+        _ball.v_speed = 0;
+    } else if (sprite_index == spr_player_idle_left || sprite_index == spr_player_walk_left) {
+        _ball.h_speed = -6;
+        _ball.v_speed = 0;
+    } else if (sprite_index == spr_player_idle_up || sprite_index == spr_player_walk_up) {
+        _ball.h_speed = 0;
+        _ball.v_speed = -6;
+    } else if (sprite_index == spr_player_idle_down || sprite_index == spr_player_walk_down) {
+        _ball.h_speed = 0;
+        _ball.v_speed = 6;
+    }
+    
+    // Add randomness to make it more dynamic
+    _ball.h_speed += random_range(-0.5, 0.5);
+    _ball.v_speed += random_range(-0.5, 0.5);
+}
+
 // Nightmare mode visual effect
 if (global.difficulty == "nightmare" && is_stuck) {
     image_alpha = 0.5 + sin(current_time * 0.1) * 0.5; // Flashing effect when stuck

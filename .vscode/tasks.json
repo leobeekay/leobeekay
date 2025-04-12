@@ -39,7 +39,7 @@
             "id": "buildCommand",
             "type": "pickString",
             "description": "Build command to execute",
-            "options": ["Package", "PackageDMG", "PackageZip"],
+            "options": ["Run", "Package", "PackageDMG", "PackageZip"],
             "default": "Run"
         }
     ]
