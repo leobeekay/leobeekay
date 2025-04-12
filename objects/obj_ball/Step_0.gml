@@ -12,8 +12,9 @@ if (tilemap_get_at_pixel(tilemap, _next_x, y)) {
     h_speed = -h_speed * 1.1;
     bounce_count++;
     
-    // Create bounce effect
-    instance_create_layer(x, y, "Instances", obj_ball_effect);
+    // Visual feedback without using obj_ball_effect
+    image_xscale = 1.2;
+    image_yscale = 1.2;
 }
 
 // Check for vertical collision
@@ -22,13 +23,18 @@ if (tilemap_get_at_pixel(tilemap, x, _next_y)) {
     v_speed = -v_speed * 1.1;
     bounce_count++;
     
-    // Create bounce effect
-    instance_create_layer(x, y, "Instances", obj_ball_effect);
+    // Visual feedback without using obj_ball_effect
+    image_xscale = 1.2;
+    image_yscale = 1.2;
 }
 
 // Update position
 x += h_speed;
 y += v_speed;
+
+// Gradually return to normal size
+image_xscale = lerp(image_xscale, 0.7, 0.1);
+image_yscale = lerp(image_yscale, 0.7, 0.1);
 
 // Destroy if speed too low or max bounces reached
 if ((abs(h_speed) < 0.5 && abs(v_speed) < 0.5) || bounce_count >= max_bounces) {

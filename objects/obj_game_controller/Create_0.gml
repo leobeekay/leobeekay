@@ -11,6 +11,11 @@ if (!variable_global_exists("difficulty")) {
 
 // Make this object persistent so it stays between room transitions
 persistent = true;
+// Initialize global game variables
+global.game_time = 0;  // Time in steps (frames)
+global.score = 0;      // Player score
 
+// Make sure this object persists between rooms
+instance_create_layer(0, 0, "Instances", obj_enemy_spawner);
 // Optional debug display to show current difficulty
 instance_create_layer(0, 0, layer, obj_debug_display);

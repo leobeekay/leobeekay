@@ -6,6 +6,13 @@ v_speed = 0;
 h_sprint_factor = 0;
 v_sprint_factor = 0;
 
+// Health system
+max_health = 100;
+health = max_health;
+is_dying = false;
+death_animation_timer = 0;
+death_animation_duration = 60; // 1 second at 60fps
+
 // Tilemap for collisions
 tilemap = layer_tilemap_get_id("Tiles_Col");
 

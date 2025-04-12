@@ -46,6 +46,35 @@ if (global.difficulty == "nightmare") {
     }
 }
 
+// Death animation handling
+if (is_dying) {
+    death_animation_timer++;
+    // Fade out and rotate during death animation
+    image_alpha = 1 - (death_animation_timer / death_animation_duration);
+    image_angle += 6; // Spin as player dies
+    
+    // When animation completes, transition to title screen
+    if (death_animation_timer >= death_animation_duration) {
+        with (instance_create_layer(0, 0, "Instances", obj_fade_transition)) {
+            target_room = rm_title; // Go back to title screen
+        }
+        instance_destroy();
+        exit; // Skip the rest of the step event
+    }
+    exit; // Skip movement while dying
+}
+
+// Check if health is depleted
+if (health <= 0 && !is_dying) {
+    is_dying = true;
+    death_animation_timer = 0;
+    // Create death effects
+    repeat(15) {
+        instance_create_layer(x + random_range(-15, 15), y + random_range(-15, 15), "Instances", obj_ball_effect);
+    }
+    exit; // Skip the rest of the step event
+}
+
 // Regular movement code with nightmare modifications if active
 var _horizontal_input = (keyboard_check(ord("D")) || keyboard_check(vk_right)) - (keyboard_check(ord("A")) || keyboard_check(vk_left));
 var _vertical_input = (keyboard_check(ord("S")) || keyboard_check(vk_down)) - (keyboard_check(ord("W")) || keyboard_check(vk_up));
