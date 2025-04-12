@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Game",
+            "type": "shell",
+            "command": "./run_game.sh",
+            "args": [
+                "--project=${workspaceFolderBasename}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Game",
+            "type": "shell",
+            "command": "./build_game.sh",
+            "args": [
+                "--project=${workspaceFolderBasename}",
+                "--command=${input:buildCommand}"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "buildCommand",
+            "type": "pickString",
+            "description": "Build command to execute",
+            "options": ["Package", "PackageDMG", "PackageZip"],
+            "default": "Run"
+        }
+    ]
+}
