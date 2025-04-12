@@ -158,9 +158,24 @@ if (h_speed != 0 || v_speed != 0) {
 
 // Ball throwing logic
 if (keyboard_check_pressed(vk_space)) {
-    // Create ball in the direction the player is facing
-    var _ball = instance_create_layer(x, y, "Instances", obj_ball);
-    
+    // Offset for ball spawn position
+    var _offset_x = 0;
+    var _offset_y = 0;
+
+    // Determine offset based on player's facing direction
+    if (sprite_index == spr_player_idle_right || sprite_index == spr_player_walk_right) {
+        _offset_x = 16; // Spawn ball to the right of the player
+    } else if (sprite_index == spr_player_idle_left || sprite_index == spr_player_walk_left) {
+        _offset_x = -16; // Spawn ball to the left of the player
+    } else if (sprite_index == spr_player_idle_down || sprite_index == spr_player_walk_down) {
+        _offset_y = 16; // Spawn ball below the player
+    } else if (sprite_index == spr_player_idle_up || sprite_index == spr_player_walk_up) {
+        _offset_y = -16; // Spawn ball above the player
+    }
+
+    // Create ball at adjusted position
+    var _ball = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_ball);
+
     // Set ball direction based on player's facing direction
     if (sprite_index == spr_player_idle_right || sprite_index == spr_player_walk_right) {
         _ball.h_speed = 6;
@@ -168,17 +183,13 @@ if (keyboard_check_pressed(vk_space)) {
     } else if (sprite_index == spr_player_idle_left || sprite_index == spr_player_walk_left) {
         _ball.h_speed = -6;
         _ball.v_speed = 0;
-    } else if (sprite_index == spr_player_idle_up || sprite_index == spr_player_walk_up) {
-        _ball.h_speed = 0;
-        _ball.v_speed = -6;
     } else if (sprite_index == spr_player_idle_down || sprite_index == spr_player_walk_down) {
         _ball.h_speed = 0;
         _ball.v_speed = 6;
+    } else if (sprite_index == spr_player_idle_up || sprite_index == spr_player_walk_up) {
+        _ball.h_speed = 0;
+        _ball.v_speed = -6;
     }
-    
-    // Add randomness to make it more dynamic
-    _ball.h_speed += random_range(-0.5, 0.5);
-    _ball.v_speed += random_range(-0.5, 0.5);
 }
 
 // Nightmare mode visual effect

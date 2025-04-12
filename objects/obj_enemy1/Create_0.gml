@@ -9,5 +9,8 @@ wander_direction = random(360);  // Direction to wander
 wander_timer = 0;        // Timer for changing wander direction
 hp = 20;                 // Health points
 
-// Get tilemap for collision detection
+// Assign the tilemap for collision detection
 tilemap = layer_tilemap_get_id("Tiles_Col");
+if (tilemap == -1) {
+    show_debug_message("ERROR: Tilemap not found for obj_enemy1");
+}

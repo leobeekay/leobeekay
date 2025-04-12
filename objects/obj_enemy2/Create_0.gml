@@ -11,5 +11,8 @@ hp = 15;                 // Health points (less than enemy1)
 change_direction_timer = 0; // Timer for erratic movement changes
 dash_cooldown = 0;       // Timer for dash attack
 
-// Get tilemap for collision detection
+// Assign the tilemap for collision detection
 tilemap = layer_tilemap_get_id("Tiles_Col");
+if (tilemap == -1) {
+    show_debug_message("ERROR: Tilemap not found for obj_enemy2");
+}

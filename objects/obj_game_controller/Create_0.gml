@@ -15,6 +15,11 @@ persistent = true;
 global.game_time = 0;  // Time in steps (frames)
 global.score = 0;      // Player score
 
+// Check if position is valid (not in a wall)
+// if (!tilemap_get_at_pixel(tilemap, _spawn_x, _spawn_y)) {
+//     _valid_position = true;
+// }
+
 // Make sure this object persists between rooms
 instance_create_layer(0, 0, "Instances", obj_enemy_spawner);
 // Optional debug display to show current difficulty
