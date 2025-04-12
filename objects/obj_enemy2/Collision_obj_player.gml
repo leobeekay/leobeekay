@@ -2,7 +2,18 @@
 if (!other.is_dying) {
     // Damage player - more damage during dash attack
     var _damage_percent = (state == "dash") ? 0.2 : 0.15; // 20% damage during dash, 15% normally
-    other.health -= other.max_health * _damage_percent;
+    
+    // Use the appropriate method to decrease player health
+    with(other) {
+        // This executes in the context of the player object
+        // where health is correctly defined
+        if (variable_instance_exists(id, "max_health")) {
+            health -= max_health * _damage_percent;
+        } else {
+            // Fallback - use a fixed value
+            health -= 20;
+        }
+    }
     
     // Apply knockback to player - stronger during dash
     var _knockback_strength = (state == "dash") ? 4.5 : 3.5;

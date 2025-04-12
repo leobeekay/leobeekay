@@ -1,7 +1,16 @@
 // Only damage player if not already dying
 if (!other.is_dying) {
-    // Damage player - 10% of max health
-    other.health -= other.max_health * 0.1;
+    // Use the appropriate method to decrease player health
+    with(other) {
+        // This executes in the context of the player object
+        // where health is correctly defined
+        if (variable_instance_exists(id, "max_health")) {
+            health -= max_health * 0.1; // 10% of max health
+        } else {
+            // Fallback - use a fixed value
+            health -= 10;
+        }
+    }
     
     // Apply knockback to player
     var _dir = point_direction(x, y, other.x, other.y);
