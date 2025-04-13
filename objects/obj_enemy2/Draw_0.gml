@@ -1,27 +1,17 @@
-// Draw the enemy sprite
-draw_self();
+/// @description Enemy1-specific drawing
 
-// Draw health bar above enemy
-var _bar_width = 25;
-var _bar_height = 3;
-var _bar_x = x - _bar_width / 2;
-var _bar_y = y - sprite_height / 2 - 8;
-var _hp_percent = hp / 15; // 15 is max hp
-
-// Draw background bar (red)
-draw_set_color(c_maroon);
-draw_rectangle(_bar_x, _bar_y, _bar_x + _bar_width, _bar_y + _bar_height, false);
-
-// Draw health bar (yellow for enemy2)
-draw_set_color(c_yellow);
-draw_rectangle(_bar_x, _bar_y, _bar_x + (_bar_width * _hp_percent), _bar_y + _bar_height, false);
-
-// Reset color
-draw_set_color(c_white);
-
-// Draw dash indicator if cooldown is active
-if (dash_cooldown > room_speed * 2) {
-    draw_set_color(c_red);
-    draw_circle(x, y - sprite_height/2 - 15, 3, false);
-    draw_set_color(c_white);
+// Override the sprite direction function
+function update_sprite_direction(_direction) {
+    if (_direction >= 45 && _direction < 135) {
+        sprite_index = sprite_down;  // Down
+    } else if (_direction >= 135 && _direction < 225) {
+        sprite_index = sprite_left;  // Left
+    } else if (_direction >= 225 && _direction < 315) {
+        sprite_index = sprite_up;    // Up
+    } else {
+        sprite_index = sprite_right; // Right
+    }
 }
+
+// Draw the sprite
+draw_self();

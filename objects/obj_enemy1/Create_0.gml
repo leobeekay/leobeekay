@@ -1,16 +1,20 @@
-/// 
-// Enemy 1 properties
-move_speed = 0.5 + random(0.3);  // Random speed variation
-detection_radius = 150;  // How far it can detect the player
-active_radius = 250;     // Only move when player is within this range
-state = "idle";          // Current behavior state
-idle_timer = 0;          // Timer for idle behavior
-wander_direction = random(360);  // Direction to wander
-wander_timer = 0;        // Timer for changing wander direction
-hp = 20;                 // Health points
+/// @description Enemy1-specific initialization
 
-// Assign the tilemap for collision detection
-tilemap = layer_tilemap_get_id("Tiles_Col");
-if (tilemap == -1) {
-    show_debug_message("ERROR: Tilemap not found for obj_enemy1");
-}
+// Call the parent event first
+event_inherited();
+
+// Override default values with enemy1-specific values
+move_speed = 1.5;
+health = 2;
+max_health = 2;
+detection_radius = 250;
+damage = 1;
+
+// Enemy1-specific sprites
+sprite_idle = spr_enemy1;
+sprite_down = spr_enemy1;
+sprite_up = spr_enemy1;
+sprite_left = spr_enemy1;
+sprite_right = spr_enemy1;
+
+sprite_index = spr_enemy1;

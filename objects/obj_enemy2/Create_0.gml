@@ -1,18 +1,20 @@
-/// 
-// Enemy 2 properties - faster but more erratic than enemy1
-move_speed = 0.8 + random(0.4);  // Faster than enemy1
-detection_radius = 180;  // Better detection than enemy1
-active_radius = 300;     // Larger active area
-state = "idle";          // Current behavior state
-idle_timer = 0;          // Timer for idle behavior
-wander_direction = random(360);  // Direction to wander
-wander_timer = 0;        // Timer for changing wander direction
-hp = 15;                 // Health points (less than enemy1)
-change_direction_timer = 0; // Timer for erratic movement changes
-dash_cooldown = 0;       // Timer for dash attack
+/// @description Enemy2-specific initialization
 
-// Assign the tilemap for collision detection
-tilemap = layer_tilemap_get_id("Tiles_Col");
-if (tilemap == -1) {
-    show_debug_message("ERROR: Tilemap not found for obj_enemy2");
-}
+// Call the parent event first
+event_inherited();
+
+// Override default values with enemy2-specific values
+move_speed = 1.5;
+health = 2;
+max_health = 2;
+detection_radius = 250;
+damage = 1;
+
+// Enemy2-specific sprites
+sprite_idle = spr_enemy2;
+sprite_down = spr_enemy2;
+sprite_up = spr_enemy2;
+sprite_left = spr_enemy2;
+sprite_right = spr_enemy2;
+
+sprite_index = spr_enemy2;
