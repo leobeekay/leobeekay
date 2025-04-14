@@ -4,7 +4,7 @@
         {
             "label": "Run Game",
             "type": "shell",
-            "command": "./run_game.sh",
+            "command": "./build_game.sh",
             "args": [
                 "--project=${workspaceFolderBasename}"
             ],
